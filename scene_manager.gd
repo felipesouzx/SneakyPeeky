@@ -5,11 +5,11 @@ extends Node2D
 
 
 func _ready() -> void:
+	Requests.change_scene.connect(change_scene)
 	add_scene(default_scene)
 
 
-func change_scene(scene_path: String) -> void:
-	var scene_file: PackedScene = load(scene_path)
+func change_scene(scene_file: PackedScene) -> void:
 	await remove_scene().tree_exited
 	add_scene(scene_file)
 
