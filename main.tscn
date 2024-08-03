@@ -1,8 +1,13 @@
-[gd_scene format=3 uid="uid://77nuhjkv4b5x"]
+[gd_scene load_steps=3 format=3 uid="uid://77nuhjkv4b5x"]
+
+[ext_resource type="Script" path="res://scene_manager.gd" id="1_0tknr"]
+[ext_resource type="PackedScene" uid="uid://xlxujdbyimbt" path="res://scenes/levels/level1.tscn" id="2_b5xhg"]
 
 [node name="Main" type="Node"]
 
 [node name="Scene" type="Node2D" parent="."]
+script = ExtResource("1_0tknr")
+default_scene = ExtResource("2_b5xhg")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
