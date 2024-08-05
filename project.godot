@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Events="*res://autoload/events.gd"
 Requests="*res://autoload/requests.gd"
+BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
 
 [display]
 
@@ -27,6 +28,10 @@ window/size/viewport_height=135
 window/size/window_width_override=960
 window/size/window_height_override=540
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg")
 
 [rendering]
 
