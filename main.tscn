@@ -1,20 +1,22 @@
 [gd_scene load_steps=3 format=3 uid="uid://77nuhjkv4b5x"]
 
 [ext_resource type="Script" path="res://scene_manager.gd" id="1_0tknr"]
-[ext_resource type="PackedScene" uid="uid://xlxujdbyimbt" path="res://scenes/levels/level1.tscn" id="2_b5xhg"]
+[ext_resource type="PackedScene" uid="uid://ca8hifcj2b335" path="res://scenes/ui/main_menu.tscn" id="3_aj5ah"]
 
 [node name="Main" type="Node"]
 
-[node name="Scene" type="Node2D" parent="."]
+[node name="SceneManager" type="Node" parent="." node_paths=PackedStringArray("scene_container", "ui_container")]
 script = ExtResource("1_0tknr")
-default_scene = ExtResource("2_b5xhg")
+default_ui = ExtResource("3_aj5ah")
+scene_container = NodePath("Scene")
+ui_container = NodePath("UI")
 
-[node name="UI" type="Control" parent="."]
+[node name="Scene" type="Node2D" parent="SceneManager"]
+
+[node name="UI" type="Control" parent="SceneManager"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
