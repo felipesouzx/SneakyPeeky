@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bm4llcimmxoa4"]
+
+[node name="PrisonTileMap" type="TileMap"]
+format = 2
