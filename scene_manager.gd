@@ -1,26 +1,34 @@
 extends Node
 
 
-@export var change_scene_request: String = "change_scene"
 @export var default_scene: PackedScene
+@export var default_ui: PackedScene
+@export var scene_container: Node2D
+@export var ui_container: Control
 
 
 func _ready() -> void:
-	Requests.get(change_scene_request).connect(change_scene)
-	add_scene(default_scene)
+	Requests.change_scene.connect(change_scene.bind(scene_container))
+	Requests.change_ui.connect(change_scene.bind(ui_container))
+	_add_scene(default_scene, scene_container)
+	_add_scene(default_ui, ui_container)
 
 
-func change_scene(scene_file: PackedScene) -> void:
-	var old_scene = remove_scene()
+
+func change_scene(scene_file: PackedScene, target = self) -> void:
+	var old_scene = _remove_scene(target)
 	if is_instance_valid(old_scene):
 		await old_scene.tree_exited
-	add_scene(scene_file)
+	if scene_file:
+		_add_scene(scene_file, target)
 
 
-func remove_scene() -> Node2D:
-	if get_child_count() == 0:
+
+func _remove_scene(target = self) -> Node:
+	if target.get_child_count() == 0:
 		return null
-	var current_scene: Node2D = get_child(0)
+	
+	var current_scene: Node = target.get_child(0)
 	if not is_instance_valid(current_scene):
 		return null
 	
@@ -28,11 +36,13 @@ func remove_scene() -> Node2D:
 	return current_scene
 
 
-func add_scene(scene_file: PackedScene) -> Node2D:
+
+func _add_scene(scene_file: PackedScene, target = self) -> Node:
 	if not scene_file:
 		return null
 	
 	var scene = scene_file.instantiate()
-	self.add_child(scene)
+	target.add_child(scene)
+	
 	return scene
 
